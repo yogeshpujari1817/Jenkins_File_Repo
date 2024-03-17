@@ -1,0 +1,28 @@
+@Library('yogesh-shared_library') _
+
+pipeline {
+    
+    agent any
+    
+    tools {
+        maven "maven-3.9.6"
+    }
+    
+    stages {
+        stage('Git Clone') {
+            steps {
+              git branch: 'main', url: 'https://github.com/yogeshpujari1817/CICD_Final_PipeLine.git'
+            }
+        }
+        stage('Maven Build') {
+            steps{
+            MavenBuild()
+            }
+        }
+        stage('code Review') {
+            steps {
+                CodeReview()
+            }
+        }
+    }
+}
